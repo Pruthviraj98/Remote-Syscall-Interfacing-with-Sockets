@@ -2,22 +2,24 @@
 #include<ctype.h>
 #include<string.h>
 #include<errno.h>
-#include<system.h>
+
 
 int main()
 {	
 
+	printf("WELCOME");
 	char dirname[]="command.txt";// the command.txt is a file where our commands are being specified
 	char err[]="sudo-apt";
 	FILE* file=fopen(dirname, "r");
 	char inputcommand[256]="hi";	
 	char commandonly[256];
-	while ((strstr("end", inputcommand)==0)//end assumed to be the final pt
-	{	
+	while (strstr("end", inputcommand)==0)//end assumed to be the final pt
+	{
+	
 	char line[256];
-	
-	scanf(">>> %s", inputcommand);
-	
+	printf(">>>");
+	scanf("%s", inputcommand);
+	int i;
 	for(i=0;i<strlen(inputcommand);i++)
 	{
 		if(inputcommand[i]==' ')
@@ -37,7 +39,7 @@ int main()
 		if(strstr(line, commandonly))
 			system(inputcommand);
 		else
-			perror("%s command is not recognized", commandonly);
+			perror("command is not recognized");
 	}
 	}
 	fclose(file);
