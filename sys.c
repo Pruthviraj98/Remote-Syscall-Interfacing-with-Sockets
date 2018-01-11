@@ -4,54 +4,27 @@
 
 char* cmdprint=">>>";
 char folder[256]="";
-/*
-int findloc(char* command[]) // function to seperate the linux command and fetch back only the directory part.
-{
-int i;
-int flag=0;
-for( i=0;i<strlen(command);i++)
-{
-flag++;
-if(command[i]==' ')
-{
-break;
-}
-}
-
-if(flag==0)
-{
-folder="";	
-return("n");
-}
-
-int count=0;
-for(int i=flag;i<strlen(command);i++)
-{
-folder[i]=command[count++];
-}
-folder=strcat(folder, command);
-return "y";
-}
-*/
 int main(int argc, char *argv[])
 {
 for(;;)
 {
 
     printf("%s", cmdprint);
-    char inputcommand[256];
-    scanf("%s", inputcommand);
- 
-	if(strstr("end", inputcommand))//we assume 'end'  is the keyword for stopping the file navigation. 
-	exit(0);
+    size_t buffersize=256;
+    char *inputcommand=(char*)malloc(buffersize*(char));
     
-	
+    getline(&inputcommand, &buffersize, stdin);
+
+	if(strstr("end", inputcommand))//we assume 'end'  is the keyword for stopping the file navigation.
+	exit(0);
+
+
     if(strstr("cd", inputcommand))
 	{
 	system(inputcommand);
-	
+
 	//edit 8/1/18
-	
+
 	int i;
 	int flag=0;
 	for( i=0;i<strlen(inputcommand);i++)
@@ -62,11 +35,11 @@ for(;;)
 	break;
 	}
 	}
-	
-	
+
+
 	if(flag==0)
 	{
-	strcpy(folder, "");	
+	strcpy(folder, "");
 	}
 	else
 	{
@@ -75,7 +48,7 @@ for(;;)
 	{
 	folder[i]=inputcommand[count++];
 	}
-	
+
 //	strcat(folder, inputcommand);
 	}
 	//end edit 8/1/18
@@ -86,21 +59,21 @@ for(;;)
 	continue;
 	}
     else
-    	{  
-        if(strcmp(">>>", cmdprint)==0)//to go to the perticular directory and execute the commands
+    {
+    if(strcmp(">>>", cmdprint)==0)//to go to the perticular directory and execute the commands
 	{
 	system(inputcommand);//if no change in directory has occured, we directly execte the input commands;
 	printf("\n");
 	}
-     else
+    else
 	{
-	char* a=strcat("chdir ", folder);//to get according to syntax : 'chdir directoryname && chdir... && inputcommand' is executed 
+	char* a=strcat("chdir ", folder);//to get according to syntax : 'chdir directoryname && chdir... && inputcommand' is executed
 	strcat(a, "&&");
-	strcat(a, inputcommand);	
+	strcat(a, inputcommand);
 	system(a);
 	}
-	
-	
+
+
 	}
 }
 }
