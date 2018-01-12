@@ -2,22 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* cmdprint=">>>";
-char folder[256]="";
 int main(int argc, char *argv[])
 {
+char cmdprint[256]=">>>";
+char folder[256]="";
+
 for(;;)
 {
 
     printf("%s", cmdprint);
     size_t buffersize=256;
-    char *inputcommand=(char*)malloc(buffersize*(char));
+    char *inputcommand=(char*)malloc(buffersize*(sizeof(char)));
     
     getline(&inputcommand, &buffersize, stdin);
 
-	if(strstr("end", inputcommand))//we assume 'end'  is the keyword for stopping the file navigation.
-	exit(0);
-
+	if(strstr(inputcommand, "end"))//we assume 'end'  is the keyword for stopping the file navigation.
+	{
+	exit(1);
+	}
 
     if(strstr("cd", inputcommand))
 	{
@@ -43,24 +45,24 @@ for(;;)
 	}
 	else
 	{
-	int count=0;
+	char folderappend[256];
+	int countappend=0;
 	for(i=flag;i<strlen(inputcommand);i++)
 	{
-	folder[i]=inputcommand[count++];
+	folderappend[countappend++]=inputcommand[i];
 	}
 
-//	strcat(folder, inputcommand);
+	strncat(folder, folderappend, countappend);
+	strncat(cmdprint, folderappend, countappend);		
+	strcat(folder, "/");
 	}
-	//end edit 8/1/18
 
-	strcat(folder, "cd");
-	strcat(cmdprint, folder); //to make the client feel apparently that we are into that folder or directory
-	strcat(cmdprint, "//");
-	continue;
+	
 	}
     else
     {
-    if(strcmp(">>>", cmdprint)==0)//to go to the perticular directory and execute the commands
+    
+	if(strcmp(">>>", cmdprint)==0)//to go to the perticular directory and execute the commands
 	{
 	system(inputcommand);//if no change in directory has occured, we directly execte the input commands;
 	printf("\n");
@@ -73,7 +75,6 @@ for(;;)
 	system(a);
 	}
 
-
-	}
+    }
 }
 }
