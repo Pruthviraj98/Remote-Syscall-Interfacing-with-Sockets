@@ -95,7 +95,7 @@ for(;;)
 		}
 		else
 		{
-		//to get according to syntax : 'chdir directoryname && chdir... && inputcommand' is executed
+		
 		char cdcommand[256]="cd ";
 
 		strncat(cdcommand, folder, strlen(folder));
