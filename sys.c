@@ -23,7 +23,7 @@ for(;;)
 	if(strstr(inputcommand, "cd"))
 	{
 
-		if(strcmp(inputcommand), "cd")
+		if(strlen(inputcommand)==3)
 		{
 		strcpy(folder, "");
 		strcpy(cmdprint, ">>>");
@@ -51,7 +51,7 @@ for(;;)
 			folderappend[countappend++]=inputcommand[i];
 			}
 		strncat(folder, folderappend, countappend);
-		strcat(folder, "/");
+		//strcat(folder, "/");
 		strncat(cmdprint, folderappend, countappend);
 		
 		}
@@ -88,7 +88,33 @@ for(;;)
 				}
 			finalcommand[x]=cdcommand[x];
 			}
-		printf("\n-------command executed-------\n\n%s\n",finalcommand);
+
+		char executedfolder[256]="";
+		int counter=3;		
+		int counter2=0;
+			while(finalcommand[counter]!='&')
+			{
+				if(finalcommand[counter]==' ')
+				{
+				executedfolder[counter2++]='/';
+				counter++;
+				continue;
+				}
+				if(finalcommand[counter]=='/')
+				{
+				counter++;
+				continue;	
+				}	
+				executedfolder[counter2++]=finalcommand[counter++];
+			}
+		
+		char executedcommand[256]="";
+		strncat(executedcommand, finalcommand, 3);
+		strcat(executedcommand, executedfolder);
+		strcat(executedcommand, " && ");
+		strcat(executedcommand, inputcommand);
+	
+		printf("\n-------command executed-------\n\n%s\n",executedcommand);
 
 		//system(cdcommand);
 		}
