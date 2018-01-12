@@ -4,6 +4,23 @@
 
 int main(int argc, char *argv[])
 {
+for(;;)
+{
+char username[100];
+char password[100];
+
+system("clear");
+
+printf("\n\t\t------------WELCOME TO REMOTE SYSCALL SYSTEM INTERFACE-------------\n\t\t");
+printf("\n\t\t USERNAME: ");
+scanf("%s", username);
+printf("\n\t\t PASSWORD: ");
+scanf("%s", password);
+
+if((strstr(username, "admin"))&&(strtr(password, "password")))
+{
+printf("\n\t\t------------WELCOME %s-------------\n", username);
+
 char cmdprint[256]=">>>";
 char folder[256]="";
 
@@ -22,7 +39,7 @@ for(;;)
 	
 	if(strstr(inputcommand, "cd"))
 	{
-
+		
 		if(strlen(inputcommand)==3)
 		{
 		strcpy(folder, "");
@@ -41,8 +58,6 @@ for(;;)
 				break;
 				}
 			}	
-	
-		printf("\n%s", folder);
 
 		char folderappend[256];
 		int countappend=0;
@@ -53,6 +68,20 @@ for(;;)
 		strncat(folder, folderappend, countappend);
 		//strcat(folder, "/");
 		strncat(cmdprint, folderappend, countappend);
+			int x;
+			for(x=3;x<strlen(cmdprint);x++)//loop to display current directory
+			{
+				if(cmdprint[x]=='\n')
+				{	
+				cmdprint[x]=':';
+				continue;
+				}
+				if(cmdprint[x]==' ')
+				{
+				cmdprint[x]='/';
+				}
+			}
+
 		
 		}
 	}
@@ -61,7 +90,7 @@ for(;;)
 	{
 		if(strlen(cmdprint)==3)//to go to the perticular directory and execute the commands
 		{
-		//system(inputcommand);//if no change in directory has occured, we directly execte the 		input commands;
+		system(inputcommand);//if no change in directory has occured, we directly execte the 		input commands;
 		printf("\n");
 		}
 		else
@@ -73,7 +102,7 @@ for(;;)
 	
 		strcat(cdcommand, " && ");
 		strncat(cdcommand, inputcommand, strlen(inputcommand));
-		printf("%s", cdcommand);	
+	
 	
 		int x;
 		char finalcommand[256];
@@ -114,10 +143,17 @@ for(;;)
 		strcat(executedcommand, " && ");
 		strcat(executedcommand, inputcommand);
 	
-		printf("\n-------command executed-------\n\n%s\n",executedcommand);
+		printf("\n-------command executed-------\n\n\n");
 
-		//system(cdcommand);
+		system(executedcommand);
 		}
 	}
+}
+}
+
+else
+{
+printf("\n\n\t------tryagain!!!!------\n\n");
+}
 }
 }
