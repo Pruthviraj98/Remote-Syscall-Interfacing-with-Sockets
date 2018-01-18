@@ -17,7 +17,7 @@ scanf("%s", username);
 printf("\n\t\t PASSWORD: ");
 scanf("%s", password);
 
-if((strstr(username, "admin"))&&(strtr(password, "password")))
+if((strstr(username, "admin"))&&(strstr(password, "password")))
 {
 printf("\n\t\t------------WELCOME %s-------------\n", username);
 
