@@ -10,7 +10,7 @@ system("gnome-terminal -x sh -c 'gcc pruter.c; ./a.out'");
 
 void *fun2(void *vargp)
 {
-system("gnome-terminal -x sh -c 'gcc server.c; ./a.out'");
+system("firefox http://www.google.co.in");
 }
 
 void *fun3(void *vargp)
