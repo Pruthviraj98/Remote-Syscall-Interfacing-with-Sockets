@@ -5,7 +5,8 @@
 
 void *myThreadFun(void *vargp)
 {
-system("gnome-terminal -x sh -c 'gcc pruter.c; ./a.out'");
+system("gnome-terminal -x sh -c 'gcc server.c; ./a.out'");
+system("gnome-terminal -x sh -c 'gcc client.c; ./a.out'");
 }
 
 void *fun2(void *vargp)
@@ -20,7 +21,7 @@ system("gnome-terminal -x sh -c 'gcc todo.c; ./a.out'");
 
 void *fun4(void *vargp)
 {
-system("gnome-terminal -x sh -c 'gcc database.c; ./a.out'");
+system("chrome http://localhost/phpmyadmin'");
 }
 
 
