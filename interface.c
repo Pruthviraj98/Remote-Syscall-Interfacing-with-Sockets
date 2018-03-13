@@ -5,8 +5,7 @@
 
 void *myThreadFun(void *vargp)
 {
-system("gnome-terminal -x sh -c 'gcc server.c; ./a.out'");
-system("gnome-terminal -x sh -c 'gcc client.c; ./a.out'");
+system("gnome-terminal -x sh -c 'gcc cl.c; ./a.out'");
 }
 
 void *fun2(void *vargp)
